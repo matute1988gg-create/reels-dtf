@@ -1,0 +1,359 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Reel DTF</title>
+<style>
+:root{--cian:#5cc8ff;--amarillo:#ffd23f}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{width:1080px;height:1920px;overflow:hidden;background:#050d1a;
+  font-family:"Liberation Sans","DejaVu Sans",Arial,sans-serif}
+#escena{position:relative;width:1080px;height:1920px;overflow:hidden;
+  background:radial-gradient(ellipse at 50% 38%,#133572 0%,#0a1d3b 48%,#050d1a 100%)}
+#grilla{position:absolute;inset:0;
+  background-image:
+    linear-gradient(rgba(92,200,255,.10) 2px,transparent 2px),
+    linear-gradient(90deg,rgba(92,200,255,.10) 2px,transparent 2px),
+    linear-gradient(rgba(92,200,255,.045) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(92,200,255,.045) 1px,transparent 1px);
+  background-size:120px 120px,120px 120px,30px 30px,30px 30px}
+#vineta{position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 55%,rgba(0,0,0,.45) 100%)}
+
+.w{display:inline-block;font-size:88px;font-weight:700;line-height:1.12;color:#fff;
+  text-shadow:0 4px 18px rgba(0,0,0,.45);opacity:0}
+.w.y{color:var(--amarillo)}
+.w.t{font-size:108px;font-weight:800;line-height:1.1}
+
+#sub{position:absolute;left:70px;right:70px;top:120px;height:340px}
+.subgrupo{position:absolute;inset:0;display:flex;flex-wrap:wrap;justify-content:center;
+  align-content:center;gap:0 22px;opacity:0}
+
+#intro{position:absolute;inset:0;opacity:0}
+#kicker{position:absolute;top:470px;left:0;right:0;text-align:center;font-size:42px;
+  letter-spacing:10px;color:var(--cian);font-weight:700}
+#titulo{position:absolute;left:70px;right:70px;top:560px;height:760px;display:flex;flex-wrap:wrap;
+  justify-content:center;align-content:center;gap:0 28px;text-align:center}
+#barra{position:absolute;left:340px;width:400px;top:1360px;height:10px;border-radius:5px;
+  background:var(--amarillo);transform-origin:left center}
+
+#badge{position:absolute;left:70px;top:470px;width:150px;height:150px;border-radius:50%;
+  border:6px solid var(--amarillo);background:rgba(10,29,59,.88);display:flex;align-items:center;
+  justify-content:center;color:var(--amarillo);font-weight:800;font-size:72px;opacity:0}
+#svg{position:absolute;left:90px;top:500px;overflow:visible}
+#pill{position:absolute;left:90px;right:90px;top:1590px;height:140px;border-radius:70px;
+  border:4px solid var(--amarillo);background:rgba(8,24,52,.88);display:flex;align-items:center;
+  justify-content:center;color:#fff;font-size:92px;font-weight:800;letter-spacing:1px;opacity:0}
+
+#resumen{position:absolute;left:70px;right:70px;top:500px;padding:56px 50px 40px;border-radius:40px;
+  background:rgba(8,24,52,.93);border:3px solid rgba(92,200,255,.45);
+  box-shadow:0 20px 80px rgba(0,0,0,.5);opacity:0}
+#r-titulo{text-align:center;font-size:44px;letter-spacing:8px;color:var(--cian);font-weight:700;margin-bottom:38px}
+.linea{display:flex;align-items:center;gap:28px;margin-bottom:30px;font-size:52px;font-weight:700;
+  line-height:1.2;color:#fff;opacity:0}
+.chk{flex:0 0 72px;height:72px;border-radius:50%;background:var(--amarillo);display:flex;
+  align-items:center;justify-content:center}
+.guardar{display:flex;justify-content:center;align-items:center;gap:26px;font-size:54px;
+  font-weight:800;color:var(--amarillo)}
+#guardar{margin-top:34px}
+
+#marca{position:absolute;left:0;right:0;bottom:70px;text-align:center;font-size:44px;font-weight:700;
+  letter-spacing:2px;color:rgba(255,255,255,.55)}
+
+#outro{position:absolute;inset:0;opacity:0;display:flex;flex-direction:column;align-items:center;
+  justify-content:center;gap:56px;
+  background:radial-gradient(ellipse at 50% 40%,#16408a 0%,#0a1d3b 50%,#050d1a 100%)}
+#o-marca{font-size:104px;font-weight:800;color:#fff;letter-spacing:1px;opacity:0}
+#o-marca b{color:var(--amarillo)}
+#o-tag{font-size:52px;font-weight:700;color:var(--cian);letter-spacing:4px;opacity:0}
+#o-guardar{opacity:0;margin-top:40px}
+</style>
+</head>
+<body>
+<div id="escena">
+  <div id="grilla"></div>
+  <div id="vineta"></div>
+
+  <div id="sub"></div>
+
+  <div id="intro">
+    <div id="kicker">GUÍA RÁPIDA DTF</div>
+    <div id="titulo"></div>
+    <div id="barra"></div>
+  </div>
+
+  <div id="badge"></div>
+
+  <svg id="svg" viewBox="0 0 820 960" width="900" height="1054" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="tela" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#2d5499"/><stop offset="1" stop-color="#1a3566"/>
+      </linearGradient>
+    </defs>
+    <g transform="translate(10,0)">
+      <!-- remera -->
+      <path d="M330,120 L170,190 L90,330 L190,385 L250,305 L250,810 L550,810 L550,305 L610,385 L710,330 L630,190 L470,120 Q400,205 330,120 Z"
+            fill="url(#tela)" stroke="#7fb8ff" stroke-width="5" stroke-linejoin="round"/>
+      <path d="M330,120 Q400,205 470,120" fill="none" stroke="#a9d2ff" stroke-width="9" stroke-linecap="round"/>
+      <path d="M250,305 L190,385 M550,305 L610,385" stroke="#5b8fd6" stroke-width="3" fill="none"/>
+      <path d="M250,780 L550,780" stroke="#5b8fd6" stroke-width="3" stroke-dasharray="10 8" fill="none"/>
+
+      <!-- estampa -->
+      <g id="estampa" style="opacity:0">
+        <rect x="310" y="230" width="180" height="210" rx="6" fill="rgba(255,210,63,.09)"
+              stroke="#ffd23f" stroke-width="4" stroke-dasharray="14 10"/>
+        <line x1="400" y1="212" x2="400" y2="458" stroke="#5cc8ff" stroke-width="2" stroke-dasharray="6 8" opacity=".5"/>
+        <line x1="292" y1="335" x2="508" y2="335" stroke="#5cc8ff" stroke-width="2" stroke-dasharray="6 8" opacity=".5"/>
+        <circle cx="400" cy="296" r="40" fill="none" stroke="#5cc8ff" stroke-width="6"/>
+        <path d="M372,388 L400,334 L428,388 Z" fill="#ffd23f"/>
+        <text x="400" y="424" text-anchor="middle" font-size="30" font-weight="800" fill="#fff"
+              font-family="Liberation Sans,DejaVu Sans,Arial,sans-serif">DTF</text>
+      </g>
+
+      <!-- cota de ancho -->
+      <g id="dAncho" style="opacity:0" stroke="#ffd23f" fill="#ffd23f">
+        <line id="aEi" x1="250" y1="815" x2="250" y2="815" stroke="#5cc8ff" stroke-width="3" stroke-dasharray="7 9"/>
+        <line id="aEd" x1="550" y1="815" x2="550" y2="815" stroke="#5cc8ff" stroke-width="3" stroke-dasharray="7 9"/>
+        <line id="aL" x1="400" y1="870" x2="400" y2="870" stroke-width="6" stroke-linecap="round"/>
+        <polygon id="aFi" points="0,0 0,0 0,0" stroke="none"/>
+        <polygon id="aFd" points="0,0 0,0 0,0" stroke="none"/>
+        <text id="aT" x="400" y="938" text-anchor="middle" font-size="46" font-weight="800" stroke="none"
+              font-family="Liberation Sans,DejaVu Sans,Arial,sans-serif"></text>
+      </g>
+
+      <!-- cota de largo -->
+      <g id="dLargo" style="opacity:0" stroke="#ffd23f" fill="#ffd23f">
+        <line id="lEi" x1="480" y1="120" x2="480" y2="120" stroke="#5cc8ff" stroke-width="3" stroke-dasharray="7 9"/>
+        <line id="lEd" x1="560" y1="810" x2="560" y2="810" stroke="#5cc8ff" stroke-width="3" stroke-dasharray="7 9"/>
+        <line id="lL" x1="760" y1="465" x2="760" y2="465" stroke-width="6" stroke-linecap="round"/>
+        <polygon id="lFi" points="0,0 0,0 0,0" stroke="none"/>
+        <polygon id="lFd" points="0,0 0,0 0,0" stroke="none"/>
+        <text id="lT" x="722" y="465" transform="rotate(-90 722 465)" text-anchor="middle" font-size="46"
+              font-weight="800" stroke="none" font-family="Liberation Sans,DejaVu Sans,Arial,sans-serif"></text>
+      </g>
+    </g>
+  </svg>
+
+  <div id="pill"></div>
+
+  <div id="resumen">
+    <div id="r-titulo">LO IMPORTANTE</div>
+    <div id="lineas"></div>
+    <div class="guardar" id="guardar">
+      <svg id="g-icono" viewBox="0 0 100 100" width="96" height="96"><path d="M22,10 H78 V92 L50,72 L22,92 Z" fill="#ffd23f"/></svg>
+      <span>Guardá este reel</span>
+    </div>
+  </div>
+
+  <div id="marca">www.dtf-arg.com</div>
+
+  <div id="outro">
+    <div id="o-marca">www.<b>dtf-arg</b>.com</div>
+    <div id="o-tag">ESTAMPADO DTF TEXTIL</div>
+    <div class="guardar" id="o-guardar">
+      <svg id="o-icono" viewBox="0 0 100 100" width="96" height="96"><path d="M22,10 H78 V92 L50,72 L22,92 Z" fill="#ffd23f"/></svg>
+      <span>Guardá este reel</span>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  const $ = id => document.getElementById(id);
+  const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+  const easeOut = x => 1 - Math.pow(1 - x, 3);
+  const easeBack = x => { const c1 = 1.70158, c3 = c1 + 1; return 1 + c3 * Math.pow(x - 1, 3) + c1 * Math.pow(x - 1, 2); };
+  const set = (el, o) => { for (const k in o) el.setAttribute(k, o[k]); };
+
+  let D = null;
+  const subGrupos = [];
+  let titWords = [];
+  let resLineas = [];
+
+  function mkWords(cont, texto, extra) {
+    const spans = [];
+    texto.split(/(\*[^*]+\*)/).forEach(seg => {
+      if (!seg) return;
+      const amar = seg.length > 2 && seg.startsWith('*') && seg.endsWith('*');
+      const limpio = amar ? seg.slice(1, -1) : seg;
+      limpio.split(/\s+/).filter(Boolean).forEach(w => {
+        const s = document.createElement('span');
+        s.className = 'w' + (amar ? ' y' : '') + (extra ? ' ' + extra : '');
+        s.textContent = w;
+        cont.appendChild(s);
+        spans.push(s);
+      });
+    });
+    return spans;
+  }
+
+  function dimsDe(m) {
+    const r = /(\d+(?:[.,]\d+)?)\s*[x×X]\s*(\d+(?:[.,]\d+)?)/.exec(m || '');
+    if (!r) return null;
+    const u = (/\b(cm|mm|pulg|in)\b/i.exec(m) || [])[1] || 'cm';
+    return [r[1] + ' ' + u, r[2] + ' ' + u];
+  }
+
+  window.setData = function (d) {
+    D = d;
+    d.pasos.forEach(p => {
+      const g = document.createElement('div');
+      g.className = 'subgrupo';
+      $('sub').appendChild(g);
+      subGrupos.push({ el: g, words: mkWords(g, p.subtitulo_destacado) });
+    });
+    titWords = mkWords($('titulo'), d.titulo.replace(/\*/g, ''), 't');
+    if (titWords.length) titWords[titWords.length - 1].classList.add('y');
+    resLineas = d.resumen_final.map(txt => {
+      const row = document.createElement('div');
+      row.className = 'linea';
+      row.innerHTML = '<div class="chk"><svg viewBox="0 0 24 24" width="40" height="40"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="#06101f" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div><div class="lt"></div>';
+      row.lastChild.textContent = txt;
+      $('lineas').appendChild(row);
+      return row;
+    });
+  };
+
+  function dimAncho(p, label) {
+    const g = $('dAncho');
+    g.style.opacity = p > 0 ? 1 : 0;
+    if (p <= 0) return;
+    const x1 = 400 - 150 * p, x2 = 400 + 150 * p, y = 870, pe = clamp(p * 1.5);
+    set($('aL'), { x1: x1 + 20, x2: x2 - 20, y1: y, y2: y });
+    set($('aFi'), { points: `${x1},${y} ${x1 + 26},${y - 12} ${x1 + 26},${y + 12}` });
+    set($('aFd'), { points: `${x2},${y} ${x2 - 26},${y - 12} ${x2 - 26},${y + 12}` });
+    set($('aEi'), { y2: 815 + 80 * pe });
+    set($('aEd'), { y2: 815 + 80 * pe });
+    const t = $('aT'); t.textContent = label; t.style.opacity = clamp((p - 0.6) / 0.4);
+  }
+
+  function dimLargo(p, label) {
+    const g = $('dLargo');
+    g.style.opacity = p > 0 ? 1 : 0;
+    if (p <= 0) return;
+    const x = 760, y1 = 465 - 345 * p, y2 = 465 + 345 * p, pe = clamp(p * 1.5);
+    set($('lL'), { x1: x, x2: x, y1: y1 + 20, y2: y2 - 20 });
+    set($('lFi'), { points: `${x},${y1} ${x - 12},${y1 + 26} ${x + 12},${y1 + 26}` });
+    set($('lFd'), { points: `${x},${y2} ${x - 12},${y2 - 26} ${x + 12},${y2 - 26}` });
+    set($('lEi'), { x2: 480 + 305 * pe });
+    set($('lEd'), { x2: 560 + 225 * pe });
+    const t = $('lT'); t.textContent = label; t.style.opacity = clamp((p - 0.6) / 0.4);
+  }
+
+  function estampa(p) {
+    const g = $('estampa');
+    g.style.opacity = p > 0 ? clamp(p * 1.5) : 0;
+    const sc = 0.85 + 0.15 * p;
+    g.setAttribute('transform', `translate(400 335) scale(${sc}) translate(-400 -335)`);
+  }
+
+  // Función determinista: el estado visual depende SOLO de t (segundos).
+  window.renderAtTime = function (t) {
+    if (!D) return;
+    const P = D.pasos, n = P.length;
+    const enIntro = t < D.intro.fin;
+    const enOutro = t >= D.outro.inicio;
+    let idx = -1;
+    if (!enIntro) {
+      if (enOutro) idx = n - 1;
+      else { idx = P.findIndex(p => t >= p.inicio && t < p.fin); if (idx < 0) idx = n - 1; }
+    }
+    const paso = idx >= 0 ? P[idx] : null;
+    const lt = paso ? t - paso.inicio : 0;
+    const tipo = paso ? paso.tipo_animacion : '';
+
+    // fondo: la grilla se desliza lentamente
+    const off = `${(-t * 8).toFixed(2)}px ${(-t * 8).toFixed(2)}px`;
+    $('grilla').style.backgroundPosition = [off, off, off, off].join(',');
+
+    // intro (gancho)
+    $('intro').style.opacity = enIntro ? 1 - clamp((t - (D.intro.fin - 0.4)) / 0.4) : 0;
+    if (enIntro) {
+      const dur = D.intro.duracion_audio;
+      titWords.forEach((w, k) => {
+        const ts = 0.1 + k * (dur * 0.8 / titWords.length);
+        const a = easeOut(clamp((t - ts) / 0.28));
+        w.style.opacity = a;
+        w.style.transform = `translateY(${(1 - a) * 40}px)`;
+      });
+      $('barra').style.transform = `scaleX(${easeOut(clamp((t - 0.2) / 0.8))})`;
+    }
+
+    // remera
+    const s = clamp((t - (D.intro.fin - 0.4)) / 0.4);
+    let shirtOp = 0.18 + 0.82 * s;
+    if (tipo === 'resumen') shirtOp = 1 - 0.9 * easeOut(clamp(lt / 0.4));
+    $('svg').style.opacity = shirtOp;
+
+    // subtítulos superiores palabra por palabra
+    subGrupos.forEach((g, i) => {
+      if (i !== idx || enOutro) { g.el.style.opacity = 0; return; }
+      const p = P[i];
+      g.el.style.opacity = clamp((p.fin - t) / 0.15);
+      g.words.forEach((w, k) => {
+        const ts = 0.1 + k * (p.duracion_audio * 0.7 / g.words.length);
+        const a = easeOut(clamp((lt - ts) / 0.2));
+        w.style.opacity = a;
+        w.style.transform = `translateY(${(1 - a) * 28}px) scale(${0.92 + 0.08 * a})`;
+      });
+    });
+
+    // badge y medida principal
+    const badge = $('badge'), pill = $('pill');
+    if (paso && !enOutro && tipo !== 'resumen') {
+      badge.textContent = paso.etiqueta_badge;
+      const L = paso.etiqueta_badge.length;
+      badge.style.fontSize = (L <= 2 ? 72 : L === 3 ? 54 : 40) + 'px';
+      badge.style.opacity = clamp(lt / 0.15);
+      badge.style.transform = `scale(${easeBack(clamp(lt / 0.4))})`;
+      pill.textContent = paso.medida_principal;
+      pill.style.fontSize = (paso.medida_principal.length > 14 ? 66 : 92) + 'px';
+      pill.style.opacity = clamp((lt - 0.7) / 0.15);
+      pill.style.transform = `scale(${easeBack(clamp((lt - 0.7) / 0.4))})`;
+    } else {
+      badge.style.opacity = 0;
+      pill.style.opacity = 0;
+    }
+
+    // ilustración según tipo de animación
+    const dims = paso ? dimsDe(paso.medida_principal) : null;
+    const pAn = easeOut(clamp((lt - 0.25) / 1.1));
+    dimAncho(tipo === 'ancho' ? pAn : 0, dims ? dims[0] : 'ANCHO');
+    dimLargo(tipo === 'largo' ? pAn : 0, dims ? dims[1] : 'LARGO');
+    estampa(tipo === 'estampa' ? easeOut(clamp((lt - 0.25) / 0.9)) : 0);
+
+    // tarjeta resumen
+    const rs = $('resumen');
+    const rp = tipo === 'resumen' ? easeOut(clamp(lt / 0.4)) : 0;
+    rs.style.opacity = rp;
+    rs.style.transform = `translateY(${(1 - rp) * 40}px)`;
+    if (rp > 0) {
+      const gap = Math.max(0.2, Math.min(0.45, (paso.duracion_audio - 1.0) / (resLineas.length + 1)));
+      resLineas.forEach((row, j) => {
+        const a = easeOut(clamp((lt - 0.5 - j * gap) / 0.3));
+        row.style.opacity = a;
+        row.style.transform = `translateX(${(1 - a) * -60}px)`;
+      });
+      $('g-icono').style.transform = `scale(${1 + 0.07 * Math.sin(2 * Math.PI * 1.1 * t)})`;
+    }
+
+    // placa de cierre
+    const lo = t - D.outro.inicio;
+    const op = enOutro ? easeOut(clamp(lo / 0.45)) : 0;
+    $('outro').style.opacity = op;
+    $('marca').style.opacity = 1 - op;
+    if (enOutro) {
+      const pop = (el, t0) => {
+        const a = clamp((lo - t0) / 0.3);
+        el.style.opacity = a;
+        el.style.transform = `translateY(${(1 - easeOut(a)) * 30}px)`;
+      };
+      pop($('o-marca'), 0.25);
+      pop($('o-tag'), 0.7);
+      pop($('o-guardar'), 1.1);
+      $('o-icono').style.transform = `scale(${1 + 0.07 * Math.sin(2 * Math.PI * 1.1 * t)})`;
+    }
+  };
+})();
+</script>
+</body>
+</html>
