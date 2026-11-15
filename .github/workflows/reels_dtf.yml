@@ -1,0 +1,58 @@
+name: Reels DTF
+
+on:
+  workflow_dispatch:
+    inputs:
+      tema:
+        description: "Tema del reel (ej: Medidas de estampado según talle)"
+        required: true
+        type: string
+      solo_guion:
+        description: "Solo generar el guion (para revisar los datos antes de renderizar)"
+        type: boolean
+        default: false
+
+jobs:
+  reel:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+
+      - name: Instalar FFmpeg
+        run: sudo apt-get update && sudo apt-get install -y ffmpeg
+
+      - name: Instalar dependencias de Python
+        run: pip install -r requirements.txt
+
+      - name: Instalar Chromium para Playwright
+        if: ${{ !inputs.solo_guion }}
+        run: python -m playwright install --with-deps chromium
+
+      - name: 1) Generar guion con Gemini
+        env:
+          TEMA: ${{ inputs.tema }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: python generar_guion.py
+
+      - name: 2) Generar voz en off
+        if: ${{ !inputs.solo_guion }}
+        run: python generar_audio.py
+
+      - name: 3) Renderizar el video
+        if: ${{ !inputs.solo_guion }}
+        run: python renderizar.py
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: reel_dtf
+          path: |
+            output/reel_dtf.mp4
+            datos_video.json
+          if-no-files-found: ignore
