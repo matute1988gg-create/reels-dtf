@@ -9,7 +9,8 @@ from google import genai
 from google.genai import types
 from pydantic import BaseModel, Field
 
-MODELO = "gemini-2.5-flash"
+# Se prueban en orden; si Google retira uno, pasa al siguiente.
+MODELOS = [m for m in [os.environ.get("GEMINI_MODEL"), "gemini-3.8-flash", "gemini-flash-latest"] if m]
 TIPOS = {"ancho", "largo", "estampa", "resumen"}
 
 
@@ -94,10 +95,13 @@ def main():
 
     client = genai.Client(api_key=os.environ["GEMINI_API_KEY"])
     ultimo_error = None
-    for intento in range(1, 4):
+    modelo_idx = 0
+    for intento in range(1, 5):
+        modelo = MODELOS[modelo_idx]
         try:
+            print(f"Usando modelo {modelo}")
             resp = client.models.generate_content(
-                model=MODELO,
+                model=modelo,
                 contents=PROMPT.format(tema=tema),
                 config=types.GenerateContentConfig(
                     response_mime_type="application/json",
@@ -112,6 +116,9 @@ def main():
         except Exception as ex:
             ultimo_error = ex
             print(f"Intento {intento} falló: {ex}")
+            if ("404" in str(ex) or "NOT_FOUND" in str(ex)) and modelo_idx + 1 < len(MODELOS):
+                modelo_idx += 1  # modelo retirado: probar el siguiente sin esperar
+                continue
             time.sleep(8 * intento)
     else:
         sys.exit(f"Gemini no devolvió un guion válido: {ultimo_error}")
