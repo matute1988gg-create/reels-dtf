@@ -28,23 +28,26 @@ class Guion(BaseModel):
     resumen_final: list[str] = Field(description="Exactamente 4 líneas clave, máximo 8 palabras cada una.")
 
 
-PROMPT = """Sos el guionista de los Reels educativos de DTF-ARG (www.dtf-arg.com), un taller de estampado DTF textil de Argentina.
+PROMPT = """Sos el guionista estrella de Reels técnicos y virales de Pochola RIP (www.dtf-arg.com), el taller y servicio de preparación DTF textil de Mendoza, Argentina liderado por Matías.
 
 TEMA: {tema}
 
-Armá el guion de un Reel vertical de unos 45 a 70 segundos.
+Armá el guion de un Reel vertical educativo de 45 a 65 segundos que genere autoridad, confianza y ganas de guardar el video o probar la herramienta.
 
-Reglas:
-- Español rioplatense claro y directo. Decí "remera" (nunca "playera").
-- Entre 4 y 7 pasos. El ÚLTIMO paso es siempre un cierre de resumen con tipo_animacion "resumen".
-- tipo_animacion: "ancho" si el paso habla del ancho de algo, "largo" si habla del largo, "estampa" para el resto
-  (temperatura, presión, archivos, tiempos, DPI, etc.) y "resumen" solo en el último paso.
-- medida_principal: si es una medida de prenda o estampa, usá el formato "ANCHO x LARGO cm" (ej: 46 x 71 cm).
-- subtitulo_destacado: la palabra clave entre asteriscos, como en la descripción del campo.
-- No inventes datos técnicos. Usá valores habituales y razonables del rubro; si no estás seguro, hablá de valores
-  aproximados y decí "aproximadamente" en la voz.
-- La voz no debe leer símbolos raros: escribí "grados", "centímetros", "por" en vez de °C, cm, x.
-- resumen_final: exactamente 4 líneas cortas con lo más importante para guardar.
+Reglas fundamentales:
+- Español rioplatense 100% auténtico, técnico pero accesible (taller gráfico real de Argentina). Decí "remera", "plancha térmica", "semitono", "bajada de blanco", "curado", "choke".
+- El GANCHO (titulo) debe ser súper atrapante: una pregunta directa o un problema que le pasa a todo estampador (ej: "¿Tu estampa DTF parece un cartón duro?", "¿Por qué se te asoma el blanco al estampar?"). Máximo 9 palabras.
+- Entre 4 y 6 pasos concisos. El ÚLTIMO paso es SIEMPRE el cierre de resumen (tipo_animacion "resumen").
+- tipo_animacion:
+  * "ancho" si habla del ancho de algo o remera.
+  * "largo" si habla del largo.
+  * "estampa" para el resto (temperaturas, 300 DPI, semitonos, presión, tiempos, choke).
+  * "resumen" solo en el último paso.
+- medida_principal: el dato técnico estrella del paso, súper corto y claro. Ej: "160 °C", "300 DPI", "15 seg", "90% tinta", "45 LPI", "0.2 mm choke", "28 x 38 cm".
+- subtitulo_destacado: frase corta de impacto (3 a 6 palabras) con la palabra clave entre asteriscos para resaltar en pantalla. Ej: "Evitá que la estampa quede *acartonada*" o "Controlá la temperatura a *160 grados*".
+- Cero símbolos raros en la voz: escribí "grados", "centímetros", "segundos", "resolución trescientos de pe i" para que la locución suene fluida y natural.
+- En el llamado a la acción final mencioná que pueden usar las herramientas gratis o pedir el servicio en dtf-arg punto com.
+- resumen_final: exactamente 4 líneas ultra prácticas para que el usuario guarde el reel.
 """
 
 
