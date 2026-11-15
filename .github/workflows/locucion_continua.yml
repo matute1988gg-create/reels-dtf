@@ -1,0 +1,43 @@
+name: Locucion Master Continua
+
+on:
+  workflow_dispatch:
+
+jobs:
+  audio:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install edge-tts
+      - name: Generar locucion continua
+        run: |
+          python -c '
+          import asyncio
+          import edge_tts
+
+          VOZ = "es-AR-TomasNeural"
+          VELOCIDAD = "+9%"
+
+          guion = (
+              "¿Tu cliente te mandó una captura pixelada de WhatsApp para estampar? "
+              "No rechaces el trabajo ni te compliques rediseñando desde cero. "
+              "En DTF-ARG me pasás cualquier imagen, aunque sea una foto de una remera vieja o una captura con fondo sucio. "
+              "Le quitamos el fondo, restauramos todos los detalles en alta definición "
+              "y le clavamos el semitono exprés con Pochola RIP. "
+              "Te entrego el archivo final exportado en PNG transparente a trescientos DPI, "
+              "calibrado para que la estampa quede con caída suave y sin parches duros de tinta. "
+              "Vos no tenés que hacer nada más que mandar a imprimir y planchar. "
+              "El servicio es en el día y arranca desde cinco mil pesos. "
+              "Mandame tu diseño por WhatsApp o visitá dtf guion arg punto com."
+          )
+
+          asyncio.run(edge_tts.Communicate(guion, VOZ, rate=VELOCIDAD).save("locucion_completa.mp3"))
+          print("Locución generada con éxito.")
+          '
+      - uses: actions/upload-artifact@v4
+        with:
+          name: locucion_master_continua
+          path: locucion_completa.mp3
