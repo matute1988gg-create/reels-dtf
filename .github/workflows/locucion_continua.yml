@@ -22,17 +22,18 @@ jobs:
           VELOCIDAD = "+8%"
 
           guion = (
-              "¿Querés hacer una remera con la foto de tu mascota, pero no querés una simple foto cuadrada aburrida? "
-              "Nos mandás su foto y la idea que tengas en mente: te armamos un diseño exclusivo desde cero, en el estilo que más te guste. "
-              "Te entregamos el archivo en alta definición con el semitono profesional listo para mandar a tu imprenta. "
-              "Colores vivos, líneas nítidas y caída suave, sin parches duros de tinta. "
-              "Escribinos por WhatsApp con tu foto y cotizamos tu diseño hoy mismo."
+              "¿Querés hacer un semitono DTF perfecto? Te muestro el paso a paso exacto que uso en mi taller. "
+              "Entrás a dtf-arg.com, cargás tu imagen y lo primero: le das a Mejorar Resolución para rescatar detalles. "
+              "Seleccionás prenda negra y activás Semitono Profesional: el negro de la tela reemplaza la tinta. "
+              "Activás la Corrección de Cobertura y calibrás el Punto Mínimo para que tu plancha no pierda puntos finos. "
+              "Le das a Generar Semitono y listo: tenés el archivo con caída suave y cero acartonado. "
+              "Entrá a dtf-arg.com y probalo gratis ahora mismo."
           )
 
-          asyncio.run(edge_tts.Communicate(guion, VOZ, rate=VELOCIDAD).save("locucion_personalizados.mp3"))
+          asyncio.run(edge_tts.Communicate(guion, VOZ, rate=VELOCIDAD).save("locucion_tutorial_app.mp3"))
           print("Locución generada con éxito.")
           '
       - uses: actions/upload-artifact@v4
         with:
-          name: locucion_personalizados_artifact
-          path: locucion_personalizados.mp3
+          name: locucion_tutorial_app_artifact
+          path: locucion_tutorial_app.mp3
