@@ -19,25 +19,20 @@ jobs:
           import edge_tts
 
           VOZ = "es-AR-TomasNeural"
-          VELOCIDAD = "+9%"
+          VELOCIDAD = "+8%"
 
           guion = (
-              "¿Te pidieron una remera con una foto fea, pixelada o sacada de internet? "
-              "No pierdas la venta: nos la mandás, recuperamos el diseño desde cero y lo dejamos en alta calidad. "
-              "Te entregamos el archivo en PNG transparente a trescientos DPI, listo para mandar a tu imprenta. "
-              "Vos no tenés que diseñar ni renegar: solo mandás a imprimir y planchás directo en tu remera. "
-              "Mirá la definición en la prenda: los colores quedan vivos y las líneas súper nítidas. "
-              "El semitono divide los puntos exactos para lograr sombras y luces perfectas. "
-              "Rescatamos cada detalle para que el diseño se funda natural con el tejido. "
-              "Cero calco rígido o acartonado. La estampa queda con caída suave, flexible y transpirable. "
-              "El servicio sale cinco mil pesos por diseño y te lo entregamos listo en el día. "
-              "Mandanos esa foto que querés recuperar por WhatsApp y tenela lista hoy mismo."
+              "¿Querés hacer una remera con la foto de tu mascota, pero no querés una simple foto cuadrada aburrida? "
+              "Nos mandás su foto y la idea que tengas en mente: te armamos un diseño exclusivo desde cero, en el estilo que más te guste. "
+              "Te entregamos el archivo en alta definición con el semitono profesional listo para mandar a tu imprenta. "
+              "Colores vivos, líneas nítidas y caída suave, sin parches duros de tinta. "
+              "Escribinos por WhatsApp con tu foto y cotizamos tu diseño hoy mismo."
           )
 
-          asyncio.run(edge_tts.Communicate(guion, VOZ, rate=VELOCIDAD).save("locucion_completa.mp3"))
+          asyncio.run(edge_tts.Communicate(guion, VOZ, rate=VELOCIDAD).save("locucion_personalizados.mp3"))
           print("Locución generada con éxito.")
           '
       - uses: actions/upload-artifact@v4
         with:
-          name: locucion_master_continua
-          path: locucion_completa.mp3
+          name: locucion_personalizados_artifact
+          path: locucion_personalizados.mp3
