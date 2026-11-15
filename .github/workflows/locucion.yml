@@ -1,0 +1,39 @@
+name: Locucion Express
+
+on:
+  workflow_dispatch:
+
+jobs:
+  audio:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install edge-tts
+      - name: Generar audios
+        run: |
+          python -c '
+          import asyncio
+          from pathlib import Path
+          import edge_tts
+
+          VOZ = "es-AR-TomasNeural"
+          VELOCIDAD = "+10%"
+          textos = [
+              ("audio_1.mp3", "¿Te mandaron una captura de pantalla pixelada por WhatsApp para estampar en remera?"),
+              ("audio_2.mp3", "No rechaces el laburo. En DTF-ARG me pasás cualquier imagen, le quito el fondo, rediseño los detalles en alta definición y le clavo el semitono exprés con Pochola RIP."),
+              ("audio_3.mp3", "Exportamos a trescientos DPI listo para imprimir. Mirá cómo queda transferido: sin parches pesados de tinta, con caída suave y el tacto liviano que tus clientes esperan."),
+              ("audio_4.mp3", "Servicio de preparación en el día. Escribime por WhatsApp para preparar tus archivos o entrá a dtf guion arg punto com.")
+          ]
+
+          Path("audios").mkdir(exist_ok=True)
+          for name, txt in textos:
+              asyncio.run(edge_tts.Communicate(txt, VOZ, rate=VELOCIDAD).save(f"audios/{name}"))
+              print(f"OK {name}")
+          '
+      - uses: actions/upload-artifact@v4
+        with:
+          name: audios_caballeros
+          path: audios/*.mp3
