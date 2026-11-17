@@ -1,20 +1,24 @@
-name: Locucion Master Continua
+name: Generar Locucion Master Continua
 
 on:
   workflow_dispatch:
+  push:
+    branches: [ main, master, update-audio ]
 
 jobs:
-  audio:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-python@v5
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
-          python-version: "3.11"
-      - run: pip install edge-tts
-      - name: Generar locucion continua
+          python-version: '3.11'
+      - name: Install dependencies
+        run: pip install edge-tts
+      - name: Generate Audio
         run: |
-          python -c '
+          python3 -c '
           import asyncio
           import edge_tts
 
@@ -22,18 +26,19 @@ jobs:
           VELOCIDAD = "+8%"
 
           guion = (
-              "¿Querés hacer un semitono DTF perfecto? Te muestro el paso a paso exacto que uso en mi taller. "
-              "Entrás a dtf-arg.com, cargás tu imagen y lo primero: le das a Mejorar Resolución para rescatar detalles. "
-              "Seleccionás prenda negra y activás Semitono Profesional: el negro de la tela reemplaza la tinta. "
-              "Activás la Corrección de Cobertura y calibrás el Punto Mínimo para que tu plancha no pierda puntos finos. "
-              "Le das a Generar Semitono y listo: tenés el archivo con caída suave y cero acartonado. "
-              "Entrá a dtf-arg.com y probalo gratis ahora mismo."
+              "¿De qué tamaño va la estampa en cada prenda? Guardate esta guía técnica de taller para no pifiarle. "
+              "En remeras clásicas, para el pecho izquierdo calculá 9 por 9 centímetros, a cuatro dedos de la costura del cuello. "
+              "Para el frente estándar, un formato A4 de 20 por 28 centímetros centrado en el pecho. "
+              "En la espalda, mandale un A3 completo de 30 por 40 centímetros, a tres dedos de la nuca. "
+              "Si hacés remeras oversize, aprovechá el ancho máximo de 33 por 48 centímetros. "
+              "Y en buzos canguro, ojo: el frente va de 26 por 26 centímetros para no pisar el bolsillo. "
+              "Armá tus pliegos a medida en dtf-arg.com."
           )
 
-          asyncio.run(edge_tts.Communicate(guion, VOZ, rate=VELOCIDAD).save("locucion_tutorial_app.mp3"))
+          asyncio.run(edge_tts.Communicate(guion, VOZ, rate=VELOCIDAD).save("locucion_medidas_prendas.mp3"))
           print("Locución generada con éxito.")
           '
       - uses: actions/upload-artifact@v4
         with:
-          name: locucion_tutorial_app_artifact
-          path: locucion_tutorial_app.mp3
+          name: locucion_medidas_artifact
+          path: locucion_medidas_prendas.mp3
